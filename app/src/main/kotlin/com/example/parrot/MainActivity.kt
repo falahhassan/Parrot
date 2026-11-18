@@ -233,7 +233,21 @@ fun MusicLibraryScreen(container: AppContainer) {
                         },
                         onSeek = {
                             container.playerConnection.seek(it)
-                        }
+                        },
+                        onShuffle = {
+                            container.playerConnection.setShuffle(
+                                !playerState.shuffle
+                            )
+                        },
+                        onRepeat = {
+                            val nextMode = when (playerState.repeat) {
+                                0 -> 2
+                                2 -> 1
+                                else -> 0
+                            }
+
+                            container.playerConnection.setRepeat(nextMode)
+                        },
                     )
                 }
             }

@@ -14,15 +14,17 @@ fun MiniPlayer(
     onPlayPause: () -> Unit,
     onPrevious: () -> Unit,
     onNext: () -> Unit,
-    onSeek: (Long) -> Unit
+    onSeek: (Long) -> Unit,
+    onShuffle: () -> Unit,
+    onRepeat: () -> Unit
 ) {
     val metadata = state.item?.mediaMetadata
 
     val title = metadata?.title?.toString()
-        ?: "Unknown Title"
+    ?: "Unknown Title"
 
     val artist = metadata?.artist?.toString()
-        ?: "Unknown Artist"
+    ?: "Unknown Artist"
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -53,7 +55,7 @@ fun MiniPlayer(
                     onSeek(it.toLong())
                 },
                 valueRange = 0f..state.durationMs
-                    .coerceAtLeast(1L).toFloat(),
+                .coerceAtLeast(1L).toFloat(),
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -71,6 +73,10 @@ fun MiniPlayer(
 
                 Spacer(modifier = Modifier.weight(1f))
 
+                IconButton(onClick = onShuffle) {
+                    Text(if (state.shuffle) "🔀" else "⇄")
+                }
+
                 IconButton(onClick = onPrevious) {
                     Text("⏮")
                 }
@@ -84,6 +90,15 @@ fun MiniPlayer(
 
                 IconButton(onClick = onNext) {
                     Text("⏭")
+                }
+                IconButton(onClick = onRepeat) {
+                    Text(
+                        when (state.repeat) {
+                            1 -> "🔂"
+                            2 -> "🔁"
+                            else -> "↻"
+                        }
+                    )
                 }
 
                 Spacer(modifier = Modifier.weight(1f))
