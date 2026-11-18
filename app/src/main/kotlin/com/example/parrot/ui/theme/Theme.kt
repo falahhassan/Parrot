@@ -1,6 +1,5 @@
 package com.example.parrot.ui.theme
 
-
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
@@ -37,7 +36,6 @@ fun CarPlayerTheme(
 ) {
     MaterialTheme(
         colorScheme = CarPlayerDarkColors,
-        typography = MaterialTheme.typography,
         content = content
     )
 }

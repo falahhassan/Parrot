@@ -25,11 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.example.parrot.data.Track
 import com.example.parrot.data.MusicFolder
-import com.example.parrot.ui.theme.CarPlayerTheme
+import com.example.parrot.ui.theme.ParrotTheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.rememberCoroutineScope
+import com.example.parrot.data.ThemePreferences
 import com.example.parrot.ui.MiniPlayer
 
 class MainActivity : ComponentActivity() {
@@ -38,13 +39,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val themePreferences = ThemePreferences(this)
 
         enableEdgeToEdge()
 
         appContainer = AppContainer(this)
 
         setContent {
-            CarPlayerTheme {
+            ParrotTheme(themePreferences){
                 MusicLibraryScreen(appContainer)
             }
         }
